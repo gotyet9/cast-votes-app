@@ -4,6 +4,8 @@
   "description": "cast your votes",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --config ./webpack.config.dev.js --progress --colors",
+    "build": "webpack --config ./webpack.config.prod.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
