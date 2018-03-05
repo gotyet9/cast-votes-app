@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/home';
 ReactDOM.render(
-  <h1>Polling is all your's now.</h1>,
+  <App/>,
   document.getElementById('app'),
 );
 if (module.hot) {
