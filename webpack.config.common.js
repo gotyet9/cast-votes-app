@@ -5,6 +5,9 @@ module.exports = {
   entry: {
     app: './src/app.js',
   },
+  devServer: {
+    historyApiFallback: true,
+  },
 plugins: [
     new CleanWebpackPlugin(['app']),
     new HtmlWebpackPlugin({

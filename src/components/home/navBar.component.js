@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class NavBar extends Component {
+    
     render() {
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -16,17 +17,11 @@ class NavBar extends Component {
                     </a>
                 </div>
                 <ul className="nav navbar-right top-nav">
-                    <li><a href="#" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i className="fa fa-bar-chart-o"></i>
-                    </a>
+                    <li>
+                        <a onClick={this.props.handleLogout} style={{cursor:'pointer'}}  className="dropdown-toggle" data-toggle="dropdown">Log Out</a>
                     </li>
                     <li className="dropdown">
-                        <a href="#" className="dropdown-toggle" data-toggle="dropdown">Admin User</a>
-                        <ul className="dropdown-menu">
-                            <li><a href="#"><i className="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                            <li><a href="#"><i className="fa fa-fw fa-cog"></i> Change Password</a></li>
-                            <li className="divider"></li>
-                            <li><a href="#"><i className="fa fa-fw fa-power-off"></i> Logout</a></li>
-                        </ul>
+                        <a className="dropdown-toggle" data-toggle="dropdown">Welcome {'Admin'} User</a>
                     </li>
                 </ul>
             </nav>

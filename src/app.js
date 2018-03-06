@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/home';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes';
+
 ReactDOM.render(
-  <App/>,
+  <Router>
+      <AppRoutes />
+ </Router>,
   document.getElementById('app'),
 );
 if (module.hot) {
