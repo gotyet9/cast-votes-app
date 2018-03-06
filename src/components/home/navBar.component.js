@@ -17,11 +17,14 @@ class NavBar extends Component {
                     </a>
                 </div>
                 <ul className="nav navbar-right top-nav">
-                    <li>
-                        <a onClick={this.props.handleLogout} style={{cursor:'pointer'}}  className="dropdown-toggle" data-toggle="dropdown">Log Out</a>
-                    </li>
+                    {this.props.addFlag?null:<li>
+                        <button className="btn btn-primary" style={{marginTop:'14px'}} onClick={this.props.handleToggleNew}>New</button>
+                    </li>}
                     <li className="dropdown">
                         <a className="dropdown-toggle" data-toggle="dropdown">Welcome {'Admin'} User</a>
+                    </li>
+                    <li>
+                        <a onClick={this.props.handleLogout} style={{cursor:'pointer'}}  className="dropdown-toggle" data-toggle="dropdown">Log Out</a>
                     </li>
                 </ul>
             </nav>

@@ -7,7 +7,7 @@ const AppRoutes = () => (
 <div> 
     <Switch>
         <Route exact path="/" component={Login} />
-        <Route exact path="/app" component={App} />
+        <Route path="/app" component={App} />
     </Switch>  
 </div>
 )
