@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NavBar from './navBar.component';
 import Dashboard from './dashboard.component';
 import AddPoll from '../polls/addPoll';
+import { ToastContainer, toast } from 'react-toastify';
+import {checkEmailAuth} from '../../utils/auth';
 import '../../styles/custom.css';
 
 class App extends Component {
@@ -11,6 +13,7 @@ class App extends Component {
       addFlag:false,
       pollTitle:'',
       polls:[],
+      role:null,
       pollOptions:[
         {votes:0,option:''},
         {votes:0,option:''}
@@ -25,8 +28,25 @@ class App extends Component {
   }
 
   componentWillMount(){
-    let storedPolls = JSON.parse(localStorage.getItem("polls"));
-    this.setState({polls:storedPolls})
+    debugger
+    if(checkEmailAuth()){
+      let storedPolls = JSON.parse(localStorage.getItem("polls"));
+      this.setState({polls:storedPolls?storedPolls:[]})
+      let role=localStorage.getItem('role')
+      if(role==1){
+        this.setState({role:1})
+      }
+      else if(role==2){
+        this.setState({role:2})
+      }
+      else{
+        toast.error("Some error occured, please try again!") 
+      }
+    }
+    else{
+      toast.error("Please login to view polls")  
+      setTimeout(function(){ this.props.history.push('/')}.bind(this), 1000);   
+    }
   }
 
   handleLogout(){
@@ -93,9 +113,12 @@ class App extends Component {
             <NavBar 
             handleLogout={this.handleLogout} 
             handleToggleNew={this.handleToggleNew} 
-            addFlag={this.state.addFlag}/>
+            addFlag={this.state.addFlag}
+            role={this.state.role}
+            />
             <Dashboard 
-            pollsData={this.state.polls}
+            pollsData={this.state.polls.length?this.state.polls:[]}
+            role={this.state.role}
             />
           </div>
           {this.state.addFlag?<div className="col-lg-6 col-md-6 col-sm-6">
@@ -109,6 +132,7 @@ class App extends Component {
               addPoll={this.handleAddPoll}
               />
           </div>:null}
+          <ToastContainer />
       </div>
     );
   }

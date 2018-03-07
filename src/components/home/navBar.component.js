@@ -17,11 +17,11 @@ class NavBar extends Component {
                     </a>
                 </div>
                 <ul className="nav navbar-right top-nav">
-                    {this.props.addFlag?null:<li>
+                    {(this.props.addFlag || this.props.role==2)?null:<li>
                         <button className="btn btn-primary" style={{marginTop:'14px'}} onClick={this.props.handleToggleNew}>New</button>
                     </li>}
                     <li className="dropdown">
-                        <a className="dropdown-toggle" data-toggle="dropdown">Welcome {'Admin'} User</a>
+                        <a className="dropdown-toggle" data-toggle="dropdown">Welcome {this.props.role==1?'Admin':'Standard'} User</a>
                     </li>
                     <li>
                         <a onClick={this.props.handleLogout} style={{cursor:'pointer'}}  className="dropdown-toggle" data-toggle="dropdown">Log Out</a>

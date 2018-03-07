@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import '../../styles/login.css';
 class Login extends Component {
   constructor(props) {
@@ -61,8 +62,20 @@ class Login extends Component {
   }
 
   handleLogin(){
-    localStorage.setItem('email',this.state.email);
-    this.props.history.push('/app')
+    debugger
+      if(this.state.email=="admin@yopmail.com"){
+        localStorage.setItem('email',this.state.email);
+        localStorage.setItem('role',1);
+        this.props.history.push('/app')
+      }
+      else if(this.state.email=="standard@yopmail.com"){
+        localStorage.setItem('email',this.state.email);
+        localStorage.setItem('role',2);
+        this.props.history.push('/app')
+      }
+      else{
+        toast.error("Unauthorized user.") 
+      }
   }
 
   render() {
@@ -85,6 +98,7 @@ class Login extends Component {
           </div>
           <button type="button" className="btn btn-primary" disabled={!this.state.formValid} onClick={this.handleLogin}>Sign In</button>
         </div>
+        <ToastContainer autoClose={1000}/>
       </form>
     );
   }
