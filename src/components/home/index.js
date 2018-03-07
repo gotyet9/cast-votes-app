@@ -25,6 +25,8 @@ class App extends Component {
     this.handleTitleChange=this.handleTitleChange.bind(this);
     this.handleOptionsChange=this.handleOptionsChange.bind(this);
     this.handleAddPoll=this.handleAddPoll.bind(this);
+    this.handleDeletePoll=this.handleDeletePoll.bind(this);
+    this.handlePollDetails=this.handlePollDetails.bind(this);
   }
 
   componentWillMount(){
@@ -106,6 +108,22 @@ class App extends Component {
     })
   }
 
+  handleDeletePoll(e,index){
+    let data=localStorage.getItem('polls')
+    let parsedData=JSON.parse(data)
+    parsedData.splice(index,1)
+    localStorage.setItem('polls',JSON.stringify(parsedData))
+    this.setState({polls:parsedData})
+    toast.success('Poll deleted successfully.')
+  }
+
+  handlePollDetails(e,index){
+    debugger
+    let res=this.state.polls[index].title
+    let stringUrl=res.replace(/ /g, '-')
+    // this.props.history.push('/app/'+stringUrl)
+  }
+
   render() {
     return (
       <div className="row">
@@ -119,6 +137,8 @@ class App extends Component {
             <Dashboard 
             pollsData={this.state.polls.length?this.state.polls:[]}
             role={this.state.role}
+            handleDeletePoll={this.handleDeletePoll}
+            pollDetails={this.handlePollDetails}
             />
           </div>
           {this.state.addFlag?<div className="col-lg-6 col-md-6 col-sm-6">
@@ -132,7 +152,7 @@ class App extends Component {
               addPoll={this.handleAddPoll}
               />
           </div>:null}
-          <ToastContainer />
+          <ToastContainer autoClose={1000}/>
       </div>
     );
   }

@@ -6,7 +6,6 @@ class AddPoll extends Component {
         this.handleOptionsChange=this.handleOptionsChange.bind(this);
       }
       handleOptionsChange(index,e){
-          debugger
         this.props.optionsChange(e.target.value,index)
       }
     render() {
