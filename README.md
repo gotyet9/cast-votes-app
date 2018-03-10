@@ -26,6 +26,10 @@ $ npm install
 $ npm start
 ```
 
+####Admin.  admin@yopmail.com / Password@123
+
+####Standard.  standard@yopmail.com / Password@123
+
 ## Technologies
 |  [React](https://facebook.github.io/react/)  |   Fast, composable client-side components.|
 
