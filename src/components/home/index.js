@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
-import NavBar from './navBar.component';
+// import NavBar from './navBar.component';
 import Dashboard from './dashboard.component';
 import AddPoll from '../polls/addPoll';
 import { ToastContainer, toast } from 'react-toastify';
 import {checkEmailAuth} from '../../utils/auth';
-import '../../styles/custom.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       addFlag:false,
+      role:null,
       pollTitle:'',
       polls:[],
-      role:null,
       pollOptions:[
         {votes:0,option:''},
         {votes:0,option:''}
     ]
     }
-    this.handleLogout=this.handleLogout.bind(this);
-    this.handleToggleNew=this.handleToggleNew.bind(this);
+    this.handleToggleNew=this.handleToggleNew.bind(this);    
     this.handleMore=this.handleMore.bind(this);
     this.handleTitleChange=this.handleTitleChange.bind(this);
     this.handleOptionsChange=this.handleOptionsChange.bind(this);
@@ -51,12 +49,8 @@ class App extends Component {
     }
   }
 
-  handleLogout(){
-    localStorage.removeItem('email');
-    this.props.history.push('/');
-  }
-
   handleToggleNew(){
+    debugger
     this.setState({
       addFlag:!this.state.addFlag,
       pollOptions:[
@@ -121,19 +115,22 @@ class App extends Component {
     debugger
     let res=this.state.polls[index].title
     let stringUrl=res.replace(/ /g, '-')
-    // this.props.history.push('/app/'+stringUrl)
+    this.props.history.push('/app/details/'+stringUrl)
   }
 
   render() {
     return (
       <div className="row">
           <div className={this.state.addFlag?"col-lg-6 col-md-6 col-sm-6":"col-lg-12 col-md-12 col-sm-12"}>
-            <NavBar 
+            {/* <NavBar 
             handleLogout={this.handleLogout} 
             handleToggleNew={this.handleToggleNew} 
             addFlag={this.state.addFlag}
             role={this.state.role}
-            />
+            /> */}
+            {(this.state.addFlag || this.state.role==2)?null:
+                        <button className="btn btn-primary" style={{marginTop:'14px',float:'right'}} onClick={this.handleToggleNew}>New</button>
+                    }
             <Dashboard 
             pollsData={this.state.polls.length?this.state.polls:[]}
             role={this.state.role}
